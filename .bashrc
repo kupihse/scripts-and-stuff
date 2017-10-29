@@ -101,19 +101,10 @@ fi
 
 alias v="vim"
 
-function javaStop {
-        pkill java
-}
+alias javaStop="pkill java"
 
-function javaStart {
-        pkill java
-        gradle -p /root/back-spring build 2> /root/back-spring/logs/build.log && java -jar /root/back-spring/build/libs/back-spring-0.0.1-SNAPSHOT.jar 2> /root/back-spring/logs/java.log &
-}
+alias javaStart="echo 'stopping java' && javaStop ; echo 'start build' && gradle -p /root/back-spring build &> /root/back-spring/logs/build.log && (java -jar /root/back-spring/build/libs/back-spring-0.0.1-SNAPSHOT.jar &> /root/back-spring/logs/java.log &) && echo 'running app'"
 
-function webhookStart {
-	(python3 /root/back-spring/webhook-server.py 2> /root/back-spring/logs/webhook.log &)
-}
+alias webhookStart="(python3 /root/back-spring/webhook-server.py &> /root/back-spring/logs/webhook.log &)"
 
-function webhookStop {
-	pkill python3	
-}
+alias webhookStop="pkill python3"
